@@ -48,7 +48,7 @@ jobs:
     steps:
       - name: Checkout
         run: |
-          git clone https://github.com/maming0001outlook/xiaopu13853873250.git ~/xiaopu13853873250
+          git clone https://github.com/maming0001/xiaopu13853873250.git ~/xiaopu13853873250
       - name: Use Node.js 12.x
         uses: actions/setup-node@v1
         with:
