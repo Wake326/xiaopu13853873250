@@ -1,71 +1,55 @@
-# main
-# github地址  https://github.com/6Svip120apk69
-# TG频道地址  https://t.me/mainscript
-# TG交流群    https://t.me/joinchat/maming0001outlookAAE7XHm-q1-7Np-tF3g
-# boxjs链接   https://raw.githubusercontent.com/6Svip120apk69/gitee_q8qsTAUA_cThxc1RBVUE/main/Task/main.boxjs.json
-
-
-
-# ⚠️⚠️⚠️特别重要,务必进行替换操作，不得使用原作者地址
-
-# 具体方法请看: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
-
-
-
-#  以账号    maming0001outlook
-#  仓库地址  https://github.com/maming0001outlook/xiaopu13853873250 
-#  文件地址   https://raw.githubusercontent.com/maming0001/xiaopu13853873250/main/iboxpay.js    为例 
-
-
-# 主要替换的字符👇
-
-# 笑谱     //js名字
-# 0 0-15   //定时，如北京时间8到23点，设置0-15
-# XP_refreshTOKEN   //环境变量之一，47行处自行添加其他
-# maming0001outlook      //账号名
-# xiaopu13853873250      //仓库名
-# main     //分支名
-# iboxpay.js  //子文件地址
-
-
-
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
 name: 笑谱
 
 on:
   workflow_dispatch:
   schedule:
-     - cron: '0 0-15 * * *'
+     - cron: '58 23,3,7,11 * * *'
   watch:
     types: started
 jobs:
   build:
     runs-on: ubuntu-latest
     if: github.event.repository.owner.id == github.event.sender.id
-    env:
-        XP_refreshTOKEN: ${{ secrets.XP_refreshTOKEN }}
-        
     steps:
       - name: Checkout
         run: |
-          git clone https://github.com/maming0001/xiaopu13853873250.git ~/xiaopu13853873250
+          git clone https://github.com/qiandaoniaoren/ziye66666.git ~/JavaScript
       - name: Use Node.js 12.x
         uses: actions/setup-node@v1
         with:
           node-version: 12.x
       - name: npm install
-        if: env.XP_refreshTOKEN
+        # if: env.XP_iboxpayHEADER
         run: |
-          cd ~/xiaopu13853873250
-          git checkout main
+          cd ~/JavaScript
           npm install
       - name: '运行 【笑谱】'
-        if: env.XP_refreshTOKEN
+        # if: env.XP_iboxpayHEADER
         run: |
-          cd ~/xiaopu13853873250
-          node iboxpay.js
+          cd ~/JavaScript
+          node Task/iboxpay.js
         env:
-          
+          XP_iboxpayHEADER: ${{ secrets.XP_iboxpayHEADER }}
+          XP_refreshTOKEN: ${{ secrets.XP_refreshTOKEN }}
+          XP_CASH: '15'
+          XP_live: '1'
+      - name: '运行 【笑谱】'
+        # if: env.XP_iboxpayHEADER
+        run: |
+          cd ~/JavaScript
+          for ((a=1; a<=15; a++))
+          do
+            node Task/iboxpay.js &
+            sleep 15m
+          done
+        env:
+          XP_iboxpayHEADER: ${{ secrets.XP_iboxpayHEADER }}
+          XP_refreshTOKEN: ${{ secrets.XP_refreshTOKEN }}
+          XP_CASH: '1'
+          XP_live: '2'
           PUSH_KEY: ${{ secrets.PUSH_KEY }}
           BARK_PUSH: ${{ secrets.BARK_PUSH }}
           TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
@@ -73,3 +57,5 @@ jobs:
           BARK_SOUND: ${{ secrets.BARK_SOUND }}
           DD_BOT_TOKEN: ${{ secrets.DD_BOT_TOKEN }}
           DD_BOT_SECRET: ${{ secrets.DD_BOT_SECRET }}
+
+    
