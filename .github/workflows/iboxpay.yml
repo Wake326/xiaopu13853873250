@@ -1,29 +1,54 @@
+# main
+# github地址  https://github.com/6Svip120apk69
+# TG频道地址  https://t.me/mainscript
+# TG交流群    https://t.me/joinchat/maming0001outlookAAE7XHm-q1-7Np-tF3g
+# boxjs链接   https://raw.githubusercontent.com/6Svip120apk69/gitee_q8qsTAUA_cThxc1RBVUE/main/Task/main.boxjs.json
+
+
+
+# ⚠️⚠️⚠️特别重要,务必进行替换操作，不得使用原作者地址
+
+# 具体方法请看: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+
+
+#  以账号    maming0001outlook
+#  仓库地址  https://github.com/maming0001outlook/xiaopu13853873250 
+#  文件地址   https://raw.githubusercontent.com/maming0001outlook/xiaopu13853873250/main/iboxpay.js    为例 
+
+
+# 主要替换的字符👇
+
+# 笑谱     //js名字
+# 0 0-15   //定时，如北京时间8到23点，设置0-15
+# XP_refreshTOKEN   //环境变量之一，47行处自行添加其他
+# maming0001outlook      //账号名
+# xiaopu13853873250      //仓库名
+# main     //分支名
+# iboxpay.js  //子文件地址
+
+
+
+
 name: 笑谱
 
 on:
   workflow_dispatch:
   schedule:
-     - cron: '*/30 0-15 * * *'
+     - cron: '0 0-15 * * *'
   watch:
     types: started
-
-env:
-  TZ: Asia/Shanghai
-
 jobs:
   build:
     runs-on: ubuntu-latest
     if: github.event.repository.owner.id == github.event.sender.id
     env:
         XP_refreshTOKEN: ${{ secrets.XP_refreshTOKEN }}
-        XP_CASH: ${{ secrets.XP_CASH }}
-        XP_live: ${{ secrets.XP_live }}
-        XP_phone: ${{ secrets.XP_phone }}
-        XP_sms: ${{ secrets.XP_sms }}
+        
     steps:
       - name: Checkout
         run: |
-          git clone -b master https://github.com/Lkiku/backup_ziye6666.git ~/backup_ziye6666
+          git clone https://github.com/maming0001outlook/xiaopu13853873250.git ~/xiaopu13853873250
       - name: Use Node.js 12.x
         uses: actions/setup-node@v1
         with:
@@ -31,15 +56,16 @@ jobs:
       - name: npm install
         if: env.XP_refreshTOKEN
         run: |
-          cd ~/backup_ziye6666
+          cd ~/xiaopu13853873250
+          git checkout main
           npm install
       - name: '运行 【笑谱】'
         if: env.XP_refreshTOKEN
         run: |
-          cd ~/backup_ziye6666
-          node Task/iboxpay.js
+          cd ~/xiaopu13853873250
+          node iboxpay.js
         env:
-
+          
           PUSH_KEY: ${{ secrets.PUSH_KEY }}
           BARK_PUSH: ${{ secrets.BARK_PUSH }}
           TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
